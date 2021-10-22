@@ -1,8 +1,8 @@
 <template>
   <v-app>
-  <v-navigation-drawer app></v-navigation-drawer> 
+  <v-navigation-drawer app v-model="drawer"></v-navigation-drawer>  
   <v-app-bar app dark color="primary">
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
        <v-btn  text><v-icon left>mdi-help</v-icon>QnA</v-btn> 
@@ -17,8 +17,11 @@
 </template>
 
 <script>
-
 export default {
-
-};
+  data() {
+    return {
+      drawer: false
+    }
+  }
+}
 </script>
