@@ -1,35 +1,55 @@
-<template>
-  <v-container>
-  <v-layout row>
-  <v-flex xs12>
-  <v-card class="mt-5">
-  <v-img
-  height="300px"
-  :src="ad.src"
-  ></v-img>
-  <v-card-text>
-  <h1 class="text--primary mb-3">{{ ad.title }}</h1>
-  <p>{{ ad.desc }}</p>
-  </v-card-text>
-  <v-card-actions>
-  <v-spacer></v-spacer>
-  <v-btn text class="warning">Edit</v-btn>
-  <v-btn class="success">Buy</v-btn>
-  </v-card-actions>
-  </v-card>
-</v-flex>
-</v-layout>
-</v-container>
+<template> 
+    <v-container>
+        <v-layout row> 
+            <v-flex xs12>
+                <v-card class="mt-5" v-if="!loading">
+                   <v-img 
+                     height="300px" :src="ad.src">
+                   </v-img>
+                  <v-card-text>
+                      <h1 class="text--purple mb-3">{{ad.title}}</h1>
+                      <p>{{ad.desc}}</p>
+                  </v-card-text>
+                  <v-card-actions>
+                     <v-spacer></v-spacer>
+                     <modal-dialog :ad= "ad"></modal-dialog>
+                     <v-btn class="success">Buy</v-btn>  
+                  </v-card-actions>	
+                </v-card>
+                <div v-else>
+                    <v-container>
+                        <v-layout row>
+                            <v-flex xs12 sm12 offset-sm6 class="mt-5">
+                                <v-progress-circular
+                                 :size="70"
+                                 :width="7"
+                                 color="#800080"
+                                 indeterminate>
+                                </v-progress-circular>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </div>
+            </v-flex>
+        </v-layout> 
+    </v-container>
 </template>
 
 <script>
+import EditAdModal from './EditAdModal.vue'
 export default {
-  props: ['id'],
-   computed: {
-    ad() {
-    const id = this.id
-    return this.$store.getters.adById(id)
+    props:['id'],
+    computed:{
+        ad(){
+            const id=this.id
+            return this.$store.getters.adById(id)
+        },
+        loading(){
+            return this.$store.getters.loading
+        }
+    },
+    components:{
+        'modal-dialog':EditAdModal
     }
-  }
-}
+} 
 </script>

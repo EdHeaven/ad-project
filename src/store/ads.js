@@ -22,14 +22,14 @@ export default {
         loadAds (state, payload) {
             state.ads = payload
         },
-        updateAd (state, {title, desc, id}) {
-          const ad = state.ads.find(a => {
-            return a.id === id
+        updateAd(state, {title, desc, id}){
+          const ad = state.ads.find(a =>{
+              return a.id === id
           })
           ad.title = title
           ad.desc = desc
-        } 
-    },
+      }
+  },
     actions: {
         async createAd ({commit, getters}, payload) {
             commit('clearError')
@@ -109,8 +109,8 @@ export default {
               commit('setLoading', false)
               throw error
             }
-        }
-    },
+          }
+  },
   getters: {
     ads(state) {
       return state.ads
