@@ -12,7 +12,7 @@
                   </v-card-text>
                   <v-card-actions>
                      <v-spacer></v-spacer>
-                     <modal-dialog :ad= "ad"></modal-dialog>
+                     <modal-dialog :ad="ad" v-if="isOwner"></modal-dialog>
                      <v-btn class="success">Buy</v-btn>  
                   </v-card-actions>	
                 </v-card>
@@ -23,7 +23,7 @@
                                 <v-progress-circular
                                  :size="70"
                                  :width="7"
-                                 color="#800080"
+                                 color="primary"
                                  indeterminate>
                                 </v-progress-circular>
                             </v-flex>
@@ -46,6 +46,9 @@ export default {
         },
         loading(){
             return this.$store.getters.loading
+        },
+        isOwner (){
+            return this.ad.OwnerId === this.$store.getters.user.id
         }
     },
     components:{
