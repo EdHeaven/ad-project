@@ -27,6 +27,11 @@ new Vue({
   // Initialize Firebase
     fb.initializeApp(firebaseConfig);
     fb.analytics();
+    fb.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch('autoLoginUser', user)
+      }
+    })
   }
 
 }).$mount('#app')
